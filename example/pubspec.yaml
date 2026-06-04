@@ -1,0 +1,16 @@
+name: status_protocol_example
+description: Example app for status_protocol package.
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  status_protocol:
+    path: ../
+
+flutter:
+  uses-material-design: true
