@@ -78,7 +78,7 @@ class StatusScreen extends StatelessWidget {
                       const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                       // color: Colors.white,
                       ),
                   textAlign: TextAlign.center,
                 ),
@@ -137,3 +137,4 @@ class StatusScreen extends StatelessWidget {
     );
   }
 }
+
