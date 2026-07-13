@@ -5,7 +5,7 @@ import 'status_theme.dart';
 
 class StatusScreen extends StatelessWidget {
   final int statusCode;
-  final VoidCallback? onRetry;
+  final void Function()? onRetry;
   final String? title;
   final String? message;
   final String? buttonLabel;
