@@ -17,6 +17,8 @@ class StatusScreen extends StatelessWidget {
   final Widget? customImage;
   final TextStyle? titleStyle;
   final TextStyle? messageStyle;
+  final List<Widget>? additionalButtons;
+  final bool showColumnButtons;
 
   const StatusScreen({
     super.key,
@@ -33,6 +35,8 @@ class StatusScreen extends StatelessWidget {
     this.customImage,
     this.titleStyle,
     this.messageStyle,
+    this.additionalButtons,
+    this.showColumnButtons = false,
   });
 
   @override
@@ -89,14 +93,14 @@ class StatusScreen extends StatelessWidget {
                       theme.messageStyle ??
                       const TextStyle(
                         fontSize: 16,
-                        color: Colors.white70,
+                       // color: Colors.white70,
                         height: 1.4,
                       ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 32),
                 if (showButton)
-                  customButton ?? _buildDefaultButton(accent, finalButtonLabel),
+                  customButton ?? _buildDefaultButton(accent, finalButtonLabel, showColumnButtons),
               ],
             ),
           ),
@@ -121,8 +125,12 @@ class StatusScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDefaultButton(Color accent, String label) {
-    return ElevatedButton(
+  Widget _buildDefaultButton(Color accent, String label, bool showColumnBTNS) {
+    return showColumnBTNS 
+    ? Column(
+      children: additionalButtons ?? [],
+    )
+    : ElevatedButton(
       onPressed: onRetry,
       style: ElevatedButton.styleFrom(
         backgroundColor: accent,
