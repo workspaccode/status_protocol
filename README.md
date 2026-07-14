@@ -61,6 +61,49 @@ StatusScreen(
 )
 ```
 
+### Multiple action buttons
+
+Pass a `List<StatusButton>` to `buttons` to show any number of buttons. Each
+button has its own `onPressed` action and a `type` (`elevated`, `outlined`, or
+`text`). By default they are laid out in a **row**; set `showColumnButtons: true`
+to stack them in a **column**.
+
+```dart
+StatusScreen(
+  statusCode: 503,
+  showColumnButtons: true, // false (default) = row, true = column
+  buttons: const [
+    StatusButton(
+      label: 'Retry',
+      type: StatusButtonType.elevated,
+      onPressed: _retry,
+    ),
+    StatusButton(
+      label: 'Contact Support',
+      type: StatusButtonType.outlined,
+      onPressed: _openSupport,
+    ),
+    StatusButton(
+      label: 'Dismiss',
+      type: StatusButtonType.text,
+      onPressed: _dismiss,
+    ),
+  ],
+)
+```
+
+`StatusButton` fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `label` | `String` | Button text (required) |
+| `onPressed` | `VoidCallback?` | Action for this specific button |
+| `type` | `StatusButtonType` | `elevated` (default), `outlined`, or `text` |
+| `accentColor` | `Color?` | Per-button color override; falls back to `accentColor` |
+
+When `buttons` is omitted, a single default button is still built from
+`buttonLabel` / `onRetry` (backward compatible).
+
 ### With StatusProtocolProvider (global theme)
 
 ```dart

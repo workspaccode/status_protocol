@@ -5,20 +5,6 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Status Protocol Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: const HomePage(),
-    );
-  }
-}
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -51,7 +37,73 @@ class HomePage extends StatelessWidget {
           _SectionHeader('Other'),
           _StatusTile(code: 0, label: 'No Internet'),
           _StatusTile(code: -1, label: 'Unknown Error'),
+          _SectionHeader('Multiple Buttons'),
+          _MultiButtonTile(),
         ],
+      ),
+    );
+  }
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Status Protocol Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
+      home: const HomePage(),
+    );
+  }
+}
+
+class _MultiButtonTile extends StatelessWidget {
+  const _MultiButtonTile();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: const Color(0xFF1A1A1E),
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      child: ListTile(
+        title: const Text(
+          '503 - Multiple action buttons',
+          style: TextStyle(color: Colors.white),
+        ),
+        subtitle: const Text(
+          'Elevated + Outlined + Text, in a column',
+          style: TextStyle(color: Colors.white54, fontSize: 12),
+        ),
+        trailing: Icon(Icons.arrow_forward_ios, color: Colors.orange, size: 16),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => StatusScreen(
+                statusCode: 503,
+                showColumnButtons: true,
+                buttons: const [
+                  StatusButton(
+                    label: 'Retry',
+                    type: StatusButtonType.elevated,
+                    onPressed: null,
+                  ),
+                  StatusButton(
+                    label: 'Open Support',
+                    type: StatusButtonType.outlined,
+                    onPressed: null,
+                  ),
+                  StatusButton(
+                    label: 'Dismiss',
+                    type: StatusButtonType.text,
+                    onPressed: null,
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -98,7 +150,8 @@ class _StatusTile extends StatelessWidget {
           config.message,
           style: const TextStyle(color: Colors.white54, fontSize: 12),
         ),
-        trailing: Icon(Icons.arrow_forward_ios, color: config.accentColor, size: 16),
+        trailing:
+            Icon(Icons.arrow_forward_ios, color: config.accentColor, size: 16),
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
